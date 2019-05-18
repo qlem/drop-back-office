@@ -1,24 +1,5 @@
 import gql from 'graphql-tag'
 
-export const DROPPED = gql`
-    query dropped(
-    $where: DropWhereInput,
-    $orderBy: DropOrderByInput
-    ) {
-        dropped(where: $where, orderBy: $orderBy) {
-            id
-            createdAt
-            updatedAt
-            text
-            color
-            author {
-                id
-                username
-            }
-        }
-    }
-`
-
 export const DROP = gql`
     query drop($id: ID!) {
         drop(id: $id) {
@@ -33,18 +14,52 @@ export const DROP = gql`
             }
         }
     }
-`
+`;
 
-export const AM_I_AUTH = gql`
+export const USERS = gql`
     query {
-        amIAuth {
-            isAuth
-            me {
+        users {
+            id
+            email
+            username
+            drops {
                 id
-                username
-                email
-                bio
             }
         }
     }
-`
+`;
+
+export const DROPPED = gql `
+    query {
+        dropped {
+          id
+          text
+          author {
+            username
+            email
+          }
+          location {
+            latitude
+            longitude
+            altitude
+          }
+          likeCount
+          dislikeCount
+        }
+    }
+`;
+
+export const LASTDROPPED = gql `
+    query {
+          dropped(orderBy: createdAt_DESC, first: 10 ) {
+                id
+                createdAt
+                text
+                author {
+                    username
+                    email
+                }
+                color
+          }
+    }
+`;
