@@ -1,6 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -14,7 +14,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'index',
+      title: 'drop',
       filename: 'index.html',
       template: './public/index.html',
       favicon: './public/favicon.ico'
@@ -31,10 +31,9 @@ module.exports = {
           presets: [
             [
               '@babel/preset-env',
-              /*  "@babel/polyfill", needed to enable ES2015+ features
-               *  see https://babeljs.io/docs/en/babel-polyfill#usage-in-node-browserify-webpack  */
               {
-                useBuiltIns: 'entry'
+                useBuiltIns: 'entry',
+                corejs: 3
               }
             ],
             '@babel/preset-react'
